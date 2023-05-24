@@ -2,7 +2,7 @@ const Student = require("../models/Student.model");
 
 module.exports.studentsController = {
   getStudents: (req, res) => {
-    Student.find({}).then(() => res.json(req.body)) // не настроил 
+    Student.find({}).then((data) => res.json(data));
   },
   createStudents: (req, res) => {
     Student.create({
@@ -15,10 +15,10 @@ module.exports.studentsController = {
   },
   deleteStudent: (req, res) => {
     Student.findByIdAndRemove(req.body.id).then(() => {
-        res.json("Студент удален")
-    })
+      res.json("Студент удален");
+    });
   },
   patchStudent: (req, res) => {
-    Student.findByIdAndUpdate(req.body.id, { name: `${req.body.name}` })
+    Student.findByIdAndUpdate(req.body.id, { name: `${req.body.name}` }).then(res.json("все нормально все хорошо"));
   },
 };
